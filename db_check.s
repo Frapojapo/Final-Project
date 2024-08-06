@@ -13,7 +13,7 @@ check_button
 			ldr r2, =FIO0PIN; get the address for the pin being accessed 
 press_loop
 			ldr r0, [r2]
-			ands r0, r1, r3
+			ands r0, r1
 			beq pressed 
 			; if the dooebell is pressed play doorbell sound
    			bl play_doorbell 
