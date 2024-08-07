@@ -1,4 +1,5 @@
-#define OFF		0
+//Off is defined to prevent any issues with dividing by zero
+#define OFF		100
 
 #define C4 		3831
 #define CS4 	3610
@@ -27,6 +28,6 @@ int doorbell_dur = 3;
 struct tone doorbell[] = {
 	{8, G4, 0x3FF},
 	{16, C4, 0x3FF},
-	{1, OFF, OFF}
+	{1, OFF, 0}
 
 };
