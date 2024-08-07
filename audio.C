@@ -1,4 +1,4 @@
-//Off is defined to prevent any issues with dividing by zero
+//Off is defined to prevent any issues with dividing by zero later in the code
 #define OFF		100
 
 #define C4 		3831
