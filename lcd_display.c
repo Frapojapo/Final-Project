@@ -48,7 +48,15 @@ void emergency_button_display(int state){
 	}
 }
 
-void espresso_machine_display(void){
+void espresso_machine_display(int time_in_s){
+	// the screen is filled with a brown background
+	lcd_fontColor(WHITE, 0xb365);
+	lcd_fillScreen(0xb365);
+	unsigned int min = 60/time_in_s;
+	unsigned int sec = time_in_s/60;
+	char Str[4];
+	sprintf(str, "%d:%02d", min, sec);
+	lcd_putString(120, 160, Str);
 	
 }
 
