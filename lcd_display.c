@@ -90,7 +90,12 @@ void lcd_interact(char x, char y, int *emergency_state, int *blinds_state) {
 		emergency_button_display(*emergency_state);
 		*emergency_state = emergency_button(*emergency_state);
 	} else if (d_espresso < radius) {
-		
+		unsigned int i = 60;
+		for (i = 60; i >= 0; i--) {
+			//delay for 1 second before incrementing
+			udelay(0xF4240);
+			espresso_machine_display(i);
+		}
 	} else if (d_blinds < radius) {
 		blinds_display(*blinds_state);
 		*blinds_state = manual_blinds();
