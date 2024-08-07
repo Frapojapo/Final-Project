@@ -13,22 +13,18 @@ void setup_DAC(void) {
  
 void udelay(unsigned int delay_in_us) {
 		
-		unsigned int ticks = (Fpclk / 1000000) * delay_in_us;
-    
-		T0TCR |= 0x02; //  reset using timer control register
-    T0TCR |= 0x01; // enable
-        
-
-    T0PR = 0x00; // prescale register
-    T0TC = 0x00; // timer counter reg
-    T0PC = 0x00; // prescale counter
-    
-    // Start Timer 0
-    while (T0TC < ticks) {
-            T0TCR = 0x01;// enable
-    };
-
-    T0TCR = 0x00; //RESET TIMER
+    // Frequency is 72MHz
+    T0PR = 0x47;                                    // Counts 1000000 per second 
+    T0TCR &= 0xFC;                                // Resetting counter to 0
+    T0TCR |= (0x1 << 1);
+    T0TC = 0x0;
+    T0TCR &= 0xFD;
+    T0MR0 = delay_in_us;                    // Set point
+    T0MCR &= 0xFFF8;                            // Set clock to stop once point is reached
+    T0MCR |= (0x1 << 2);
+    T0TCR |= 0x1;                    // Begin clock
+    while (T0TC != T0MR0) {
+    }            // Stuck in while loop until point is reached
 
 }
 
